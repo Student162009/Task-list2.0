@@ -3,7 +3,8 @@ window.addEventListener('load', () => {
     const password = document.querySelector("#Password");
     const reg = document.querySelector("#reg");
     const Ban = document.getElementById("error");
-    const Create = document.getElementById("create");
+    const Per = document.getElementById("per");
+    const have = document.getElementById("have");
 
 reg.addEventListener("click", async()=>{
     const Login = login.value;
@@ -16,7 +17,7 @@ reg.addEventListener("click", async()=>{
         body: JSON.stringify({ Login, Password})
     });
     if (response.ok) {
-        Create.play();
+        Per.play();
         setTimeout(() => {
             window.location.href = "../index.html";
         }, 2000);
@@ -27,6 +28,12 @@ reg.addEventListener("click", async()=>{
         Ban.play();
         console.error('Не удалось зарегестрироваться');
     }
+});
+have.addEventListener("click", ()=> {
+        Per.play();
+        setTimeout(() => {
+            window.location.href = "../index.html";
+        }, 2000);
 });
 });
 

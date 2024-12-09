@@ -7,6 +7,27 @@
     --purple: #8B5CF6;
 }
 
+@media (max-width: 768px) {
+    
+    h1 {
+        font-size: 50px; 
+    }
+    
+    h3 {
+        font-size: 30px; 
+    }
+ 
+    .enter {
+        width: 95%; 
+        padding-left : 10px;
+        padding-right : 10px; 
+    }
+ 
+    input, button {
+        font-size : 1rem; 
+    }
+ }
+
 * {
     margin: 0;
     padding: 0; 
@@ -61,7 +82,7 @@ h3 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
 }
 
-input, button, a {
+input, button {
     padding: 1rem;
     border-radius: 1rem;
 }

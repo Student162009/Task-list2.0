@@ -1,24 +1,19 @@
 const express = require("express");
-const controller = require("../controllers/controller");
-const controll = require("../controllers/controllerAUT")
+const taskController = require("../controllers/controller");
+const userController = require("../controllers/controllerAUT");
 const router = express.Router();
-
-
-router.get("/get", controller.GetData);
 
 router.use(express.json());
 
+router.get("/get", taskController.GetData);
+router.post("/add", taskController.addData);
+router.put("/edit", taskController.editTask);
+router.delete("/delete", taskController.deleteTask);
+router.get("/sort", taskController.sortData);
+router.post("/complete", taskController.markComplete);
+router.post("/addWithDeadline", taskController.addTaskWithDeadline);
 
-router.post("/add", controller.addData);
+router.post("/enter", userController.Enter);
+router.post("/reg", userController.addData);
 
-router.put("/edit", controller.editTask);
-
-router.delete("/delete", controller.deleteTask);
-
-router.get("/sort", controller.sortData);
-router.post("/complete", controller.markComplete);
-router.post("/addWithDeadline", controller.addTaskWithDeadline);
-
-router.post("/enter", controll.Enter);
-router.post("/reg", controll.addData);
 module.exports = router;

@@ -83,6 +83,4 @@ const checkOverdueTasks = () => {
     writeData(Data);
 };
 
-
-
 module.exports = { GetData: () => [...Data], addData, editData, deleteData, sortTasks, addTaskWithDeadline, markTaskComplete };

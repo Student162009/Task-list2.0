@@ -10,6 +10,47 @@
     --completed: #4BB543;
 }
 
+@media (max-width :768px) {  
+   
+    header h1 {   
+        font-size :2rem ;  
+    }  
+
+    input, button {  
+        padding :0.75rem ;  
+        font-size :1rem ;  
+    }  
+
+    #new-task-input,  
+    #new-task-deadline {  
+        flex-basis :100% ;  
+        margin-bottom :0.5rem ;  
+    }  
+
+    #new-task-form {  
+        flex-direction :column ;  
+    }  
+
+    #tasks .task {  
+        flex-direction :column ;  
+        align-items:flex-start ;  
+    }  
+
+    .task .actions {  
+        width :100% ;  
+        justify-content:center ;  
+        margin-top :0.5rem ;  
+    }  
+
+    .task-list h2 {  
+        font-size :1.25rem ;  
+    }  
+
+    .task .content .text {  
+        font-size :1rem ;  
+    }
+}
+
 * {
     margin: 0;
     box-sizing: border-box;

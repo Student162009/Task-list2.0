@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
     const enter = document.querySelector("#enter");
     const Ban = document.getElementById("error");
     const Enter = document.getElementById("log-in");
+    const reg = document.querySelector("#reg");
 
     enter.addEventListener("click", async()=>{
     const Login = login.value;
@@ -19,7 +20,7 @@ window.addEventListener('load', () => {
     if (response.ok) {
         Enter.play();
         setTimeout(() => {
-            window.location.href = "../html/main.html";
+            window.location.href = "/html/main.html";
         }, 2000);
     }
 
@@ -27,5 +28,12 @@ window.addEventListener('load', () => {
         Ban.play();
         console.error('Не удалось войти');
     }
+});
+reg.addEventListener("click", ()=>{
+    
+        Enter.play();
+        setTimeout(() => {
+            window.location.href = "/html/regist.html";
+        }, 2000);
 });
 });
