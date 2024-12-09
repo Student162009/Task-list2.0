@@ -19,7 +19,7 @@ reg.addEventListener("click", async()=>{
     if (response.ok) {
         Per.play();
         setTimeout(() => {
-            window.location.href = "../index.html";
+            window.location.href = "../";
         }, 2000);
         
     }
@@ -32,7 +32,7 @@ reg.addEventListener("click", async()=>{
 have.addEventListener("click", ()=> {
         Per.play();
         setTimeout(() => {
-            window.location.href = "../index.html";
+            window.location.href = "../";
         }, 2000);
 });
 });
