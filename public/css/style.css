@@ -11,7 +11,7 @@
 }
 
 @media (max-width :768px) {  
-   
+    
     header h1 {   
         font-size :2rem ;  
     }  
@@ -265,4 +265,37 @@ main {
 
 .task .actions .delete {
     color: crimson;
+}
+
+#FI {
+    background-image: linear-gradient(to right, var(--pink), var(--purple)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    padding: 10px; 
+    margin-left: 20px; 
+    display: inline-block; 
+    font-size: 1.5rem; 
+}
+.container{
+    display: flex;
+    justify-content: center;
+}
+#log {
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    transition: 0.4s; 
+}
+
+#log:hover {
+    opacity: 0.8; 
+}
+
+#log:active {
+    opacity: 0.6; 
 }

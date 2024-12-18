@@ -65,4 +65,4 @@ const addTaskWithDeadline = (req, res) => {
     res.status(200).json(result);
 };
 
-module.exports = { GetData, addData, editTask, deleteTask, sortData, markComplete, addTaskWithDeadline };
+module.exports = { GetData, addData, editTask, deleteTask, sortData, markComplete, addTaskWithDeadline};

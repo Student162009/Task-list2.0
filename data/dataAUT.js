@@ -27,15 +27,28 @@ const readData = () => {
 };
 readData();
 
-const addData = (login, parol) => {
+const addData = (login, parol, numtel, firstname, name, email) => {
     const User = Data.find(user => user.login === login);
     if (User) {
         return null; 
     }
-    const newData = { login, parol};
+    const newData = { login, parol, numtel, firstname, name, email};
     Data.push(newData);
     writeData(Data);
     return newData;
 };
 
-module.exports = { GetData: () => [...Data], addData  };
+const editPassword = (Login, NewPassword) =>{
+        const LoginIndex = Data.findIndex(l => l.login === Login);
+        if (LoginIndex === -1) {
+            return null;
+        }
+        console.log(Login);
+        console.log(NewPassword);
+        Data[LoginIndex] = { login: Login, parol: NewPassword };
+        writeData(Data);
+        return Data[LoginIndex];
+    
+};
+
+module.exports = { GetData: () => [...Data], addData, editPassword};

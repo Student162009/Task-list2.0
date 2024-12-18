@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
     const Createaudio = document.getElementById("create");
-    const Create = document.getElementById("new-task-submit")
+    const Create = document.getElementById("new-task-submit");
     const form = document.querySelector("#new-task-form");
     const input = document.querySelector("#new-task-input");
     const deadlineInput = document.querySelector("#new-task-deadline");
@@ -9,9 +9,25 @@ window.addEventListener('load', () => {
     const Checkaudio = document.getElementById("check");
     const Editaudio = document.getElementById("edit");
     const Deleteaudio = document.getElementById("delete");
+    const mainM = document.getElementById("mainM");
+
+    mainM.autoplay = true;
+    mainM.loop = true;
+
     Create.addEventListener("click", function() {
         Createaudio.play();
     });
+ 
+    const firstname = localStorage.getItem('firstname');
+    const name = localStorage.getItem('name');
+
+    if (firstname && name) {
+        document.getElementById("FI").innerText = `Welcome, ${firstname} ${name}!`;
+    }
+
+document.getElementById("log").addEventListener("click", () =>{
+    window.location.href = "/html/Enter.html";
+});
 
     async function getTasks() {
         const response = await fetch("/task/get", {
@@ -148,6 +164,7 @@ window.addEventListener('load', () => {
 
         if (new Date(task.deadline) < new Date() && !task.completed) {
             task_el.classList.add('overdue');
+            task_edit_el.disabled = true;
         }
 
         list_el.appendChild(task_el);

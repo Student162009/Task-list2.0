@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-
 const dataFilePath = path.join(__dirname, 'json/data.json');
 
 let Data = [];
@@ -28,21 +27,23 @@ const readData = () => {
 readData();
 
 const addData = (task) => {
-    const newData = { task };
+    const newData = { task }; 
     Data.push(newData);
     writeData(Data);
     return newData;
 };
 
-const editData = (task, newTask) => {
+
+const editData = (task, newTaskData) => {
     const taskIndex = Data.findIndex(t => t.task === task);
     if (taskIndex === -1) {
         return null;
     }
-    Data[taskIndex] = { task: newTask };
+    Data[taskIndex] = { ...Data[taskIndex], ...newTaskData }; 
     writeData(Data);
     return Data[taskIndex];
 };
+
 
 const deleteData = (task) => {
     const taskIndex = Data.findIndex(t => t.task === task);
@@ -83,4 +84,5 @@ const checkOverdueTasks = () => {
     writeData(Data);
 };
 
-module.exports = { GetData: () => [...Data], addData, editData, deleteData, sortTasks, addTaskWithDeadline, markTaskComplete };
+
+module.exports = { GetData: () => [...Data], addData, editData, deleteData, sortTasks, addTaskWithDeadline, markTaskComplete};

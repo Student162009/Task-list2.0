@@ -13,7 +13,10 @@ router.get("/sort", taskController.sortData);
 router.post("/complete", taskController.markComplete);
 router.post("/addWithDeadline", taskController.addTaskWithDeadline);
 
+
+
 router.post("/enter", userController.Enter);
 router.post("/reg", userController.addData);
+router.put("/editPassword", userController.editPassword);
 
 module.exports = router;
