@@ -7,7 +7,7 @@ const GetData = (req, res) => {
 
 const addData = (req, res) => {
     const dataFromClient = req.body;
-    const result = DATA.addData(dataFromClient.task);
+    const result = DATA.addData(dataFromClient.task, dataFromClient.category);
 
     if (!result) {
         res.status(409).send("УПС! ТАКОЕ ЗАДАНИЕ УЖЕ ЕСТЬ");
@@ -59,10 +59,23 @@ const markComplete = (req, res) => {
 };
 
 const addTaskWithDeadline = (req, res) => {
-    const { task, deadline } = req.body;
-    const result = DATA.addTaskWithDeadline(task, deadline);
+    const { task, deadline, category } = req.body;
+    const result = DATA.addTaskWithDeadline(task, deadline, category);
 
     res.status(200).json(result);
 };
 
-module.exports = { GetData, addData, editTask, deleteTask, sortData, markComplete, addTaskWithDeadline};
+
+const FindbyCategory = (req, res) => {
+    const { cat } = req.body;
+    const result = DATA.FindbyCategory(cat); 
+
+    if (result) {
+        res.status(200).json(result);
+    } else {
+        res.status(404).send("Категория не найдена");
+    }
+};
+
+
+module.exports = { GetData, addData, editTask, deleteTask, sortData, markComplete, addTaskWithDeadline, FindbyCategory};

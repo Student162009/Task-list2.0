@@ -1,0 +1,100 @@
+:root {
+    --dark: #374151;
+    --darker: #1F2937;
+    --darkest: #111827;
+    --grey: #6B7280;
+    --pink: #EC4899;
+    --purple: #8B5CF6;
+}
+
+@media (max-width: 768px) {
+    
+    h1 {
+         font-size: 6vw; 
+    }
+ 
+    .enter {
+         padding: 15px; 
+    }
+ 
+    input, button {
+         font-size: 1rem; 
+    }
+ }
+
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: "Fira Sans", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #FFF;
+    background-color: var(--dark);
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+}
+
+h1 {
+    font-size: 58px; 
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent; 
+}
+
+.head {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+.enter {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    width: 400px;
+    padding: 20px; 
+    background-color: var(--darkest);
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+}
+
+input, button {
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+input {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    flex: 1 1 60%;
+    margin-bottom: 1rem;
+    background-color: var(--darker);
+    color: var(--light);
+    font-size: 1.25rem;
+}
+
+button, a {
+    color: var(--pink);
+    font-size: 1.25rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 2px solid var(--purple);
+}

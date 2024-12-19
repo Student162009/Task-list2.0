@@ -28,7 +28,6 @@ if(user){
 };
 const editPassword = (req, res) => {
     const { Login, Newpass} = req.body;
-    console.log(Newpass);
     const result = DATA.editPassword(Login, Newpass);
 
     if (!result) {
@@ -39,6 +38,41 @@ const editPassword = (req, res) => {
     res.status(200).json(result);
 };
 
+const editLogin = (req, res) => {
+    const { Login, Newlogin} = req.body;
+    const result = DATA.editLogin(Login, Newlogin);
+
+    if (!result) {
+        res.status(404).send("Логин не найден.");
+        return;
+    }
+
+    res.status(200).json(result);
+};
+
+const editFI = (req, res) => {
+    const { Login, Newname, Newfirstname } = req.body;
+    const result = DATA.editFI(Login, Newname, Newfirstname);
+
+    if (!result) {
+        res.status(404).send("Пользователь не найден.");
+        return;
+    }
+
+    res.status(200).json(result);
+};
+
+const deleteUser = (req, res) => {
+    const { Login } = req.body;
+    const result = DATA.deleteData(Login);
+
+    if (!result) {
+        res.status(404).send("Пользователь не найден");
+        return;
+    }
+
+    res.status(200).send("Пользователь удален");
+};
 
 
-module.exports = {addData, Enter, editPassword};
+module.exports = {addData, Enter, editPassword, editLogin, editFI, deleteUser};

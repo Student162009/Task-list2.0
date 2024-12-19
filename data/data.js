@@ -26,8 +26,8 @@ const readData = () => {
 };
 readData();
 
-const addData = (task) => {
-    const newData = { task }; 
+const addData = (task, category) => {
+    const newData = { task, category }; 
     Data.push(newData);
     writeData(Data);
     return newData;
@@ -39,7 +39,7 @@ const editData = (task, newTaskData) => {
     if (taskIndex === -1) {
         return null;
     }
-    Data[taskIndex] = { ...Data[taskIndex], ...newTaskData }; 
+    Data[taskIndex].task = newTaskData;
     writeData(Data);
     return Data[taskIndex];
 };
@@ -67,8 +67,8 @@ const markTaskComplete = (task) => {
     writeData(Data);
     return Data[taskIndex];
 };
-const addTaskWithDeadline = (task, deadline) => {
-    const newData = { task, deadline, completed: false };
+const addTaskWithDeadline = (task, deadline, category) => {
+    const newData = { task, deadline, completed: false, category };
     Data.push(newData);
     writeData(Data);
     return newData;
@@ -84,5 +84,10 @@ const checkOverdueTasks = () => {
     writeData(Data);
 };
 
+const FindbyCategory = (category) => {
+    const result = Data.filter(c => c.category === category);
+    return result;
+};
 
-module.exports = { GetData: () => [...Data], addData, editData, deleteData, sortTasks, addTaskWithDeadline, markTaskComplete};
+
+module.exports = { GetData: () => [...Data], addData, editData, deleteData, sortTasks, addTaskWithDeadline, markTaskComplete, FindbyCategory};

@@ -43,12 +43,43 @@ const editPassword = (Login, NewPassword) =>{
         if (LoginIndex === -1) {
             return null;
         }
-        console.log(Login);
-        console.log(NewPassword);
-        Data[LoginIndex] = { login: Login, parol: NewPassword };
+        Data[LoginIndex].parol=NewPassword;
         writeData(Data);
         return Data[LoginIndex];
     
 };
 
-module.exports = { GetData: () => [...Data], addData, editPassword};
+const editLogin = (Login, NewLogin) =>{
+    const LoginIndex = Data.findIndex(l => l.login === Login);
+    if (LoginIndex === -1) {
+        return null;
+    }
+    Data[LoginIndex].login = NewLogin;
+    writeData(Data);
+    return Data[LoginIndex];
+
+};
+
+const editFI = (Login, NewName, NewFirstName) =>{
+    const LoginIndex = Data.findIndex(l => l.login === Login);
+    if (LoginIndex === -1) {
+        return null;
+    }
+    Data[LoginIndex].name = NewName;
+    Data[LoginIndex].firstname = NewFirstName;
+    writeData(Data);
+    return Data[LoginIndex];
+
+};
+
+const deleteData = (Login) => {
+    const userIndex = Data.findIndex(l => l.login === Login);
+    if (userIndex === -1) {
+        return false; 
+    }
+    Data.splice(userIndex, 1);
+    writeData(Data);
+    return true;
+};
+
+module.exports = { GetData: () => [...Data], addData, editPassword, editLogin, editFI, deleteData};

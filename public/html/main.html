@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task List</title>
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
-    <audio id="create" src="../music/Create.mp3"></audio>
-    <audio id="check" src="../music/Check.mp3"></audio>
-    <audio id="delete" src="../music/Delete.mp3"></audio>
-    <audio id="edit" src="../music/Edit.mp3"></audio>
-    <audio id="mainM" src="../music/Main music.mp3" autoplay='autoplay' loop='loop'></audio>
+    <audio id="create" src="/music/Create.mp3"></audio>
+    <audio id="check" src="/music/Check.mp3"></audio>
+    <audio id="delete" src="/music/Delete.mp3"></audio>
+    <audio id="edit" src="/music/Edit.mp3"></audio>
+    <audio id="mainM" src="/music/Main.mp3" autoplay='autoplay' loop='loop'></audio>
 <div class="container">
-    <a href="" id="FI"></a>
+    <a href="Edituser.html" id="FI"></a>
     <button id="log" >Log Out</button>
 </div>
     
@@ -24,11 +24,14 @@
         <h1>Task List</h1>
         <form id="new-task-form">
             <input type="text" name="new-task-input" id="new-task-input" class="in" placeholder="What do you have planned?" />
-            <input type="date" name="new-task-deadline" id="new-task-deadline" class="in" />
+            <input type="date" name="new-task-deadline" id="new-task-deadline" class="in" placeholder="Deadline" />
+            <input type="text" name="category" id="category" placeholder="Category" />
             <button id="new-task-submit">Add task</button>
         </form>
         <div id="sort-tasks">
             <button id="sort-tasks-submit">Sort tasks</button>
+            <input type="text" name="findcategory" id="findcategory" placeholder="Category">
+            <button id="findcatbut">FindByCategory</button>
         </div>
     </header>
     <main>
@@ -37,7 +40,7 @@
             <div id="tasks"></div>
         </section>
     </main>
-    <script src="../js/script.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
 
