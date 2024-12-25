@@ -38,6 +38,7 @@ document.getElementById("log").addEventListener("click", () =>{
 });
 
     async function getTasks() {
+        document.querySelector("#tasks").innerHTML = "";
         const response = await fetch("/task/get", {
             method: "GET",
             headers: {
