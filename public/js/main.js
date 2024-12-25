@@ -111,7 +111,6 @@ document.getElementById("log").addEventListener("click", () =>{
              sortDeadline();
             }
             else if (event.target.value === "all") {
-             document.querySelector("#tasks").innerHTML = "";
              getTasks();
             } else if(event.target.value === "completedtasks"){
             sortCOM();
