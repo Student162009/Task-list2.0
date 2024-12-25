@@ -77,5 +77,67 @@ const FindbyCategory = (req, res) => {
     }
 };
 
+const FindbyName = (req, res) =>{
+    const {name} = req.body;
+    const result = DATA.findName(name); 
 
-module.exports = { GetData, addData, editTask, deleteTask, sortData, markComplete, addTaskWithDeadline, FindbyCategory};
+    if (result) {
+        res.status(200).json(result);
+    } else {
+        res.status(404).send("Имя не найдено");
+    }
+};
+
+const FindbyDead = (req, res) =>{
+    const {data} = req.body;
+    const result = DATA.findDead(data); 
+
+    if (result) {
+        res.status(200).json(result);
+    } else {
+        res.status(404).send("Смерть не найдена");
+    }
+};
+
+const SortDead = (req, res) =>{
+    const result = DATA.getDead();
+    if (result.length > 0) {
+        res.status(200).json(result);
+    } else {
+        res.status(404).send("Нет просроченных задач.");
+    }
+};
+
+const SortCOM = (req, res) =>{
+    const result = DATA.getCOM();
+    if (result.length > 0) {
+        res.status(200).json(result);
+    } else {
+        res.status(404).send("Нет выполненных задач.");
+    }
+};
+
+const SortNotCOM = (req, res) =>{
+    const result = DATA.getNotCOM();
+    if (result.length > 0) {
+        res.status(200).json(result);
+    } else {
+        res.status(404).send("Нет не выполненных задач.");
+    }
+};
+
+module.exports = { 
+    GetData, 
+    addData, 
+    editTask, 
+    deleteTask, 
+    sortData, 
+    markComplete, 
+    addTaskWithDeadline, 
+    FindbyCategory, 
+    FindbyName, 
+    FindbyDead, 
+    SortDead,
+    SortCOM,
+    SortNotCOM
+};

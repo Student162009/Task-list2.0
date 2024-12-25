@@ -147,6 +147,7 @@ input, button {
     -webkit-text-fill-color: transparent;
     cursor: pointer;
     transition: 0.4s;
+    border: 2px solid var(--purple);
 }
 
 #new-task-submit:hover {
@@ -167,6 +168,7 @@ input, button {
     font-weight: 700;
     cursor: pointer;
     transition: 0.4s;
+    border: 2px solid var(--purple);
 }
 
 #sort-tasks-submit:hover {
@@ -290,6 +292,7 @@ main {
     font-size: 1.25rem; 
     font-weight: 700; 
     transition: 0.4s; 
+    border: 2px solid var(--purple);
 }
 
 #log:hover {
@@ -342,4 +345,98 @@ main {
     font-size: 1.25rem; 
     font-weight: 700; 
     transition: 0.4s; 
+    border: 2px solid var(--purple);
+}
+
+#findname{
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    flex: 1 1 60%;
+    background-color: var(--darker);
+    color: var(--light);
+    font-size: 1.25rem;
+}
+#findnamebut{
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    transition: 0.4s; 
+    border: 2px solid var(--purple);
+}
+
+#finddeadline{
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    flex: 1 1 60%;
+    background-color: var(--darker);
+    color: var(--light);
+    font-size: 1.25rem;
+}
+#finddeadlinebut{
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    transition: 0.4s; 
+    border: 2px solid var(--purple);
+}
+
+#Overduetasks {
+    background-color: var(--overdue); 
+}
+
+#Overduetasks:checked {
+    background-color: var(--darkest); 
+}
+
+
+#completedtasks {
+    background-color: var(--completed); 
+    
+}
+
+#completedtasks:checked {
+    background-color: var(--darkest); 
+}
+
+
+#all {
+    background-color: var(--purple); 
+}
+
+#all:checked {
+    background-color: var(--pink); 
+}
+
+#not {
+    background-color: var(--grey); 
+}
+
+#not:checked {
+    background-color: var(--darkest); 
+}
+
+#f{
+    border: none;
 }

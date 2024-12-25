@@ -13,6 +13,11 @@ window.addEventListener('load', () => {
     const catinput = document.getElementById("category");
     const findCat = document.getElementById("findcategory")
     const categorybut = document.getElementById("findcatbut");
+    const findNam = document.getElementById("findname");
+    const findnamebut = document.getElementById("findnamebut");
+    const findDead = document.getElementById("finddeadline");
+    const findDeadbut = document.getElementById("finddeadlinebut");
+    const change =  document.querySelectorAll('input[name="status"]');
 
     mainM.autoplay = true;
     mainM.loop = true;
@@ -88,7 +93,36 @@ document.getElementById("log").addEventListener("click", () =>{
     categorybut.addEventListener("click", (e)=>{
         e.preventDefault();
         findCategory();
-    })
+    });
+
+    findnamebut.addEventListener("click", (e)=>{
+        e.preventDefault();
+        findName();
+    });
+
+    findDeadbut.addEventListener("click", (e)=>{
+        e.preventDefault();
+        findDeadline();
+    });
+
+   change.forEach((elem) => {
+        elem.addEventListener("change", async (event) => {
+            if (event.target.value === "overdue") {
+             sortDeadline();
+            }
+            else if (event.target.value === "all") {
+             document.querySelector("#tasks").innerHTML = "";
+             getTasks();
+            } else if(event.target.value === "completedtasks"){
+            sortCOM();
+            } else if(event.target.value === "not"){
+            sortNotCOM();
+            }else{
+                console.log("error")
+            }
+        });
+    });
+
     function sortTasks(tasks) {
         return tasks.sort((a, b) => a.task.localeCompare(b.task));
     }
@@ -237,6 +271,7 @@ document.getElementById("log").addEventListener("click", () =>{
                 };
             }, false);
     }
+
     async function findCategory() { 
         const cat = findCat.value; 
         if(cat===''){
@@ -255,5 +290,89 @@ document.getElementById("log").addEventListener("click", () =>{
        console.log('Нету ');
      } 
     }
+
+    async function findName() { 
+        const name = findNam.value; 
+        if(name===''){
+            getTasks();
+        }
+        const response = await fetch('/task/findTask', { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ name }) });
+        
+        if (response.ok) { 
+            document.querySelector("#tasks").innerHTML = "";
+            let tasks = await response.json();
+            tasks.forEach(task => addTask(task));
+             } else { 
+       console.log('Нету ');
+     } 
+    }
+
+    async function findDeadline() { 
+        const data = findDead.value; 
+        if(data===''){
+            getTasks();
+        }
+        const response = await fetch('/task/findDead', { 
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ data }) });
+        
+        if (response.ok) { 
+            document.querySelector("#tasks").innerHTML = "";
+            let tasks = await response.json();
+            tasks.forEach(task => addTask(task));
+             } else { 
+       console.log('Нету ');
+     } 
+    }
+
+    async function sortDeadline() { 
+        const response = await fetch('/task/sortDead', { 
+          method: 'GET', 
+          headers: { 'Content-Type': 'application/json' }});
+        
+        if (response.ok) { 
+            document.querySelector("#tasks").innerHTML = "";
+            let tasks = await response.json();
+            tasks.forEach(task => addTask(task));
+             } else { 
+            document.querySelector("#tasks").innerHTML = "";
+       console.log('Нету ');
+     } 
+    }
+
+    async function sortCOM() { 
+        const response = await fetch('/task/sortCOM', { 
+          method: 'GET', 
+          headers: { 'Content-Type': 'application/json' }});
+        
+        if (response.ok) { 
+            document.querySelector("#tasks").innerHTML = "";
+            let tasks = await response.json();
+            tasks.forEach(task => addTask(task));
+             } else { 
+            document.querySelector("#tasks").innerHTML = "";
+       console.log('Нету ');
+     } 
+    }
+
+    async function sortNotCOM() { 
+        const response = await fetch('/task/sortNotCOM', { 
+          method: 'GET', 
+          headers: { 'Content-Type': 'application/json' }});
+        
+        if (response.ok) { 
+            document.querySelector("#tasks").innerHTML = "";
+            let tasks = await response.json();
+            tasks.forEach(task => addTask(task));
+             } else { 
+            document.querySelector("#tasks").innerHTML = "";
+       console.log('Нету ');
+     } 
+    }
+
     getTasks();
 });

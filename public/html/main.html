@@ -18,20 +18,68 @@
     <a href="Edituser.html" id="FI"></a>
     <button id="log" >Log Out</button>
 </div>
-    
-
     <header>
         <h1>Task List</h1>
         <form id="new-task-form">
-            <input type="text" name="new-task-input" id="new-task-input" class="in" placeholder="What do you have planned?" />
+            <input type="text" name="new-task-input" id="new-task-input" class="in" placeholder="What do you have planned?" autocomplete="off" autocorrect="off"/>
             <input type="date" name="new-task-deadline" id="new-task-deadline" class="in" placeholder="Deadline" />
-            <input type="text" name="category" id="category" placeholder="Category" />
+            <input type="text" name="category" id="category" placeholder="Category" autocomplete="off" autocorrect="off"/>
             <button id="new-task-submit">Add task</button>
         </form>
         <div id="sort-tasks">
             <button id="sort-tasks-submit">Sort tasks</button>
-            <input type="text" name="findcategory" id="findcategory" placeholder="Category">
+            <input type="text" name="findcategory" id="findcategory" placeholder="Category name to search" autocomplete="off" autocorrect="off">
             <button id="findcatbut">FindByCategory</button>
+            <input type="text" name="findname" id="findname" placeholder="Name or letter to search for" autocomplete="off" autocorrect="off">
+            <button id="findnamebut">FindByName</button>
+            <input type="date" name="finddeadline" id="finddeadline" placeholder="Deadline to search" autocomplete="off" autocorrect="off">
+            <button id="finddeadlinebut">FindByDeadline</button>
+        <h1>Sort by ready tasks</h1>
+        <fieldset class="radio-set" id="f">
+            <legend class="visually-hidden"></legend>
+            <div class="radio-container">
+              <label class="radio-label">
+                <span class="radio-title">Not completed</span>
+                <input
+                  class="radio"
+                  type="radio"
+                  name="status"
+                  value="not"
+                  id="not"
+                >
+                <span class="radio-title">Completed</span>
+              </label>
+              <label class="radio-label">
+                <input
+                  class="radio"
+                  type="radio"
+                  name="status"
+                  value="completedtasks"
+                  id="completedtasks"
+                >
+                <span class="radio-title">Overdue</span>
+              </label>
+              <label class="radio-label">
+                <input
+                  class="radio"
+                  type="radio"
+                  name="status"
+                  id="Overduetasks"
+                  value="overdue"
+                >
+                <span class="radio-title">All</span>
+              </label>
+              <label class="radio-label">
+                <input
+                  class="radio"
+                  type="radio"
+                  name="status"
+                  id="all"
+                  value="all"
+                >
+              </label>
+            </div>
+          </fieldset>
         </div>
     </header>
     <main>

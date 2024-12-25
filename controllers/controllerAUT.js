@@ -15,7 +15,7 @@ const Enter = (req, res) =>{
     const dataFromClient = req.body;
     const data = DATA.GetData();
 
-    const user = data.find(user => user.login === dataFromClient.Login && user.parol === dataFromClient.Password);
+    const user = data.find(user => user.login === dataFromClient.Data && user.parol === dataFromClient.Password);
 if(user){
     res.status(200).json({
         message: "Одобрено",
@@ -74,5 +74,36 @@ const deleteUser = (req, res) => {
     res.status(200).send("Пользователь удален");
 };
 
+const EnterEmail = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetData();
 
-module.exports = {addData, Enter, editPassword, editLogin, editFI, deleteUser};
+    const user = data.find(user => user.email === dataFromClient.Data && user.parol === dataFromClient.Password);
+if(user){
+    res.status(200).json({
+        message: "Одобрено",
+        firstname: user.firstname,
+        name: user.name
+    });
+}else{
+    res.status(409).send("УПС! ТАКОЙ ЭЛЕКТРОННОЙ ПОЧТЫ ИЛИ ПАРОЛЯ НЕТ");
+}
+};
+
+const EnterTel = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetData();
+
+    const user = data.find(user => user.numtel === dataFromClient.Data && user.parol === dataFromClient.Password);
+if(user){
+    res.status(200).json({
+        message: "Одобрено",
+        firstname: user.firstname,
+        name: user.name
+    });
+}else{
+    res.status(409).send("УПС! ТАКОГО ТЕЛЕФОНА ИЛИ ПАРОЛЯ НЕТ");
+}
+};
+
+module.exports = {addData, Enter, editPassword, editLogin, editFI, deleteUser, EnterEmail, EnterTel};

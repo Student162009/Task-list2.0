@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const dataFilePath = path.join(__dirname, 'json/data.json');
+
+const dataFilePath = path.join(__dirname, `json/data.json`);
 
 let Data = [];
 
@@ -89,5 +90,44 @@ const FindbyCategory = (category) => {
     return result;
 };
 
+const findName = (name) =>{
+    const result =  Data.filter(n => n.task.includes(name))
+    return result;
+};
 
-module.exports = { GetData: () => [...Data], addData, editData, deleteData, sortTasks, addTaskWithDeadline, markTaskComplete, FindbyCategory};
+const findDead = (dead) => {
+    const result = Data.filter(d => d.deadline === dead);
+    return result;
+};
+
+const getDead = () => {
+    const currentDate = new Date();
+    const result = Data.filter(task => task.deadline && new Date(task.deadline) < currentDate);
+    return result;
+};
+
+const getCOM = () => {
+    const result = Data.filter(task => task.completed === true);
+    return result;
+};
+
+const getNotCOM = () => {
+    const result = Data.filter(task => task.completed === false);
+    return result;
+};
+
+module.exports = {
+     GetData: () => [...Data], 
+     addData, 
+     editData, 
+     deleteData, 
+     sortTasks, 
+     addTaskWithDeadline, 
+     markTaskComplete, 
+     FindbyCategory,
+     findName,
+     findDead,
+     getDead,  
+     getCOM,
+     getNotCOM
+    };
