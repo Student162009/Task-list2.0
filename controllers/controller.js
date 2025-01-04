@@ -1,8 +1,5 @@
 const DATA = require("../data/data");
 
-const fs = require('fs');
-const path = require('path');
-
 const addUserData = (req, res) => {
     const dataFromClient = req.body;
     const result = DATA.addUserData(dataFromClient.Login, dataFromClient.Password, dataFromClient.Number, dataFromClient.firstname, dataFromClient.name, dataFromClient.email);

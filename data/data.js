@@ -91,7 +91,13 @@ const editLogin = (Login, NewLogin) =>{
     if (LoginIndex === -1) {
         return null;
     }
+    const oldFilePath = path.join(userTasksDir, `${LOG}.json`);
+    const newFilePath = path.join(userTasksDir, `${NewLogin}.json`);
+
     UserData[LoginIndex].login = NewLogin;
+    fs.renameSync(oldFilePath, newFilePath);
+    setUserLog(NewLogin);
+    readData();
     writeUserData(UserData);
     return UserData[LoginIndex];
 
@@ -115,6 +121,8 @@ const deleteUserData = (Login) => {
         return false; 
     }
     UserData.splice(userIndex, 1);
+    const FilePath = path.join(userTasksDir, `${Login}.json`);
+    fs.unlinkSync(FilePath);
     writeUserData(UserData);
     return true;
 };
