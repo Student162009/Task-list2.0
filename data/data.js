@@ -1,22 +1,57 @@
 const fs = require('fs');
 const path = require('path');
+let LOG = ''; 
+const userTasksDir = path.join(__dirname, 'json/userTasks');
 
-const dataFilePath = path.join(__dirname, `json/data.json`);
+if (!fs.existsSync(userTasksDir)) {
+    fs.mkdirSync(userTasksDir);
+}
 
 let Data = [];
+let UserData = [];
+
+const setUserLog = (login) => {
+    Data = [];
+    LOG = login;
+};
+
+const UserLOGFilePath = path.join(__dirname, 'json/dataAUT.json');
+
+const writeUserData = (DATA) => {
+    fs.writeFileSync(UserLOGFilePath, JSON.stringify(DATA, null, 2));
+};
+
+const readUserData = () => {
+    if (UserData.length === 0) {
+        if (!fs.existsSync(UserLOGFilePath) || fs.readFileSync(UserLOGFilePath).length === 0) {
+            UserData = [];
+        } else {
+            try {
+                const rawData = fs.readFileSync(UserLOGFilePath);
+                UserData = JSON.parse(rawData);
+            } catch (error) {
+                console.error("Ошибка при чтении данных:", error);
+                UserData = [];
+            }
+        }
+    }
+    return UserData;
+};
+readUserData();
 
 const writeData = (DATA) => {
-    fs.writeFileSync(dataFilePath, JSON.stringify(DATA, null, 2));
+    fs.writeFileSync(path.join(__dirname, `json/userTasks/${LOG}.json`), JSON.stringify(DATA, null, 2));
 };
 
 const readData = () => {
     if (Data.length === 0) {
-        if (!fs.existsSync(dataFilePath) || fs.readFileSync(dataFilePath).length === 0) {
+        if (!fs.existsSync(path.join(__dirname, `json/userTasks/${LOG}.json`)) || fs.readFileSync(path.join(__dirname, `json/userTasks/${LOG}.json`)).length === 0) {
             Data = [];
         } else {
             try {
-                const rawData = fs.readFileSync(dataFilePath);
+                const rawData = fs.readFileSync(path.join(__dirname, `json/userTasks/${LOG}.json`));
                 Data = JSON.parse(rawData);
+                console.log(Data);
             } catch (error) {
                 console.error("Ошибка при чтении данных:", error);
                 Data = [];
@@ -25,7 +60,71 @@ const readData = () => {
     }
     return Data;
 };
-readData();
+
+
+const addUserData = ( login, parol, numtel, firstname, name, email) => {
+    const User = UserData.find(user => user.login === login);
+    if (User) {
+        return null; 
+    }
+    const newData = {login, parol, numtel, firstname, name, email};
+    UserData.push(newData);
+    writeUserData(UserData);
+    addUserTaskFile(login);
+    setUserLog(login);
+    readData();
+    return newData;}
+    
+const editPassword = (Login, NewPassword) =>{
+        const LoginIndex = UserData.findIndex(l => l.login === Login);
+        if (LoginIndex === -1) {
+            return null;
+        }
+        UserData[LoginIndex].parol=NewPassword;
+        writeUserData(UserData);
+        return UserData[LoginIndex];
+    
+};
+
+const editLogin = (Login, NewLogin) =>{
+    const LoginIndex = UserData.findIndex(l => l.login === Login);
+    if (LoginIndex === -1) {
+        return null;
+    }
+    UserData[LoginIndex].login = NewLogin;
+    writeUserData(UserData);
+    return UserData[LoginIndex];
+
+};
+
+const editFI = (Login, NewName, NewFirstName) =>{
+    const LoginIndex = UserData.findIndex(l => l.login === Login);
+    if (LoginIndex === -1) {
+        return null;
+    }
+    UserData[LoginIndex].name = NewName;
+    UserData[LoginIndex].firstname = NewFirstName;
+    writeUserData(UserData);
+    return UserData[LoginIndex];
+
+};
+
+const deleteUserData = (Login) => {
+    const userIndex = UserData.findIndex(l => l.login === Login);
+    if (userIndex === -1) {
+        return false; 
+    }
+    UserData.splice(userIndex, 1);
+    writeUserData(UserData);
+    return true;
+};
+
+const addUserTaskFile = (login) => {
+    const taskFilePath = path.join(userTasksDir, `${login}.json`);
+    if (!fs.existsSync(taskFilePath)) {
+        fs.writeFileSync(taskFilePath, JSON.stringify([])); 
+    }
+};
 
 const addData = (task, category) => {
     const newData = { task, category }; 
@@ -115,12 +214,18 @@ const getNotCOM = () => {
     const result = Data.filter(task => task.completed === false);
     return result;
 };
-
+readData();
 module.exports = {
+     GetUserData: () => [...UserData],
      GetData: () => [...Data], 
+     addUserData,   
      addData, 
      editData, 
+     editPassword,
+     editLogin,
+     editFI,
      deleteData, 
+     deleteUserData,
      sortTasks, 
      addTaskWithDeadline, 
      markTaskComplete, 
@@ -129,5 +234,7 @@ module.exports = {
      findDead,
      getDead,  
      getCOM,
-     getNotCOM
+     getNotCOM,
+     setUserLog,
+     readData
     };

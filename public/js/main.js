@@ -34,26 +34,23 @@ window.addEventListener('load', () => {
     }
 
 document.getElementById("log").addEventListener("click", () =>{
+    document.querySelector("#tasks").innerHTML = "";
     window.location.href = "/html/Enter.html";
 });
 
-    async function getTasks() {
-        document.querySelector("#tasks").innerHTML = "";
-        const response = await fetch("/task/get", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (response.ok) {
-            let tasks = await response.json();
-            tasks = sortTasks(tasks); 
-            tasks.forEach(task => addTask(task));
-        } else {
-            console.error('Не удалось получить задачи');
-        }
+async function getTasks() {
+    document.querySelector("#tasks").innerHTML = "";
+    const response = await fetch("/task/get", { method: "GET", headers: { "Content-Type": "application/json" } });
+    if (response.ok) {
+        let tasks = await response.json();
+        tasks = sortTasks(tasks);
+        tasks.forEach(task => addTask(task));
+    } else {
+        console.error('Не удалось получить задачи', response.statusText);
+        alert('Ошибка при получении задач: ' + response.statusText);
     }
+}
+
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -66,7 +63,11 @@ document.getElementById("log").addEventListener("click", () =>{
             alert("Поле задачи и категории не могут быть пустыми");
             return;
         }
-
+        if (new Date(deadline) < new Date()) {
+            alert("Срок выполнения не может быть в прошлом");
+            return;
+        }
+        
         const response = await fetch("/task/addWithDeadline", {
             method: "POST",
             headers: {
@@ -78,6 +79,7 @@ document.getElementById("log").addEventListener("click", () =>{
         if (response.ok) {
             const newTask = await response.json();
             addTask(newTask);
+            getTasks();
             input.value = '';
             deadlineInput.value = '';
             catinput.value = '';

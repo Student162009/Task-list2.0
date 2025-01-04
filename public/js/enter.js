@@ -26,6 +26,7 @@ if(Data.includes('+375')){
         Enter.play();
         localStorage.setItem('firstname', result.firstname);
         localStorage.setItem('name', result.name);
+        localStorage.setItem('userID', result.login);
         setTimeout(() => {
             window.location.href = "/html/main.html";
         }, 2000);
