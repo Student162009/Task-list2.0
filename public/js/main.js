@@ -37,6 +37,12 @@ document.getElementById("log").addEventListener("click", () =>{
     document.querySelector("#tasks").innerHTML = "";
     window.location.href = "/html/Enter.html";
 });
+document.getElementById("editUser").addEventListener("click", () =>{
+    Editaudio.play();
+    setTimeout(() => {
+    window.location.href="/html/Edituser.html"; }, 2000);
+});
+
 
 async function getTasks() {
     document.querySelector("#tasks").innerHTML = "";
