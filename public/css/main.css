@@ -1,13 +1,13 @@
 :root {
-    --dark: #374151;
-    --darker: #1F2937;
-    --darkest: #111827;
-    --grey: #6B7280;
-    --pink: #EC4899;
-    --purple: #8B5CF6;
-    --light: #EEE;
-    --overdue: #FF0000; 
-    --completed: #4BB543;
+    --dark: #111827; 
+    --darker: #1a202c; 
+    --darkest: #0f172a; 
+    --grey: #718096;
+    --pink: #9e2b58; 
+    --purple: #6a3fa1; 
+    --light: #d4d8de; 
+    --overdue: #990000;  
+    --completed: #2a6f21; 
 }
 
 @media (max-width: 768px) {  
@@ -21,7 +21,8 @@
     }  
 
     #new-task-input,  
-    #new-task-deadline {  
+    #new-task-deadline,
+    #category {  
         flex-basis: 100%;  
         margin-bottom: 0.5rem;  
     }  
@@ -48,20 +49,53 @@
     .task .content .text {  
         font-size: 1rem;  
     }
+    html { 
+        scroll-behavior: smooth;
+        --webkit-overflow-scrolling: touch; 
+    }
+}
+
+span{
+        color: var(--grey);
 }
 
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: "Fira sans", sans-serif;
+    font-family: "Comfortaa", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
+    animation: smooth-scroll var(--scroll-duration) var(--scroll-timing-function) both;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: linear-gradient(135deg, var(--darkest), var(--dark), var(--darker));
     color: #FFF;
-    background-color: var(--dark);
+}
+
+footer{ 
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes smooth-scroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(1%);
+    }
 }
 
 header {
@@ -91,6 +125,7 @@ input, button {
     padding: 1rem;
     border-radius: 1rem;
     margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 input {
@@ -106,7 +141,6 @@ button:hover:not(#Overduetasks):not(#completedtasks):not(#all):not(#not):not(inp
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .task .content input[type="checkbox"] {
     appearance: none; 
@@ -386,6 +420,9 @@ main {
     color: var(--light);
     font-size: 1.25rem;
 }
+#findcategory::placeholder {
+    color: var(--grey);
+}
 #findcatbut{
     background-image: linear-gradient(to right, var(--pink), var(--purple));
     -webkit-background-clip: text;
@@ -413,6 +450,11 @@ main {
     color: var(--light);
     font-size: 1.25rem;
 }
+
+#findname::placeholder {
+    color: var(--grey);
+}
+
 #findnamebut{
     background-image: linear-gradient(to right, var(--pink), var(--purple));
     -webkit-background-clip: text;
@@ -491,3 +533,4 @@ main {
 #f{
     border: none;
 }
+

@@ -1,20 +1,19 @@
 :root {
-    --dark: #374151;
-    --darker: #1F2937;
-    --darkest: #111827;
-    --grey: #6B7280;
-    --pink: #EC4899;
-    --purple: #8B5CF6;
+    --dark: #111827; 
+    --darker: #1a202c; 
+    --darkest: #0f172a; 
+    --grey: #718096;
+    --pink: #d53f8c;
+    --purple: #805ad5; 
 }
-
 @media (max-width: 768px) {
     
     h1  {
-        font-size: 50px; 
+        font-size: 15px; 
     }
     
     p {
-        font-size: 35px;
+        font-size: 20px;
     }
    
  
@@ -29,11 +28,10 @@
     }
  }
 
-* {
+ * {
     margin: 0;
-    padding: 0; 
     box-sizing: border-box;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Comfortaa", sans-serif;
 }
 
 body {
@@ -53,7 +51,7 @@ body {
 }
 
 h1 {
-    font-size: 80px; 
+    font-size: 50px; 
     background-image: linear-gradient(to right, var(--pink), var(--purple));
     -webkit-background-clip: text; 
     background-clip: text; 
@@ -61,7 +59,7 @@ h1 {
 }
 
 p {
-    font-size: 50px; 
+    font-size: 35px; 
 }
 
 .head {
@@ -81,7 +79,7 @@ p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
 }
 
- button, a {
+ button {
     padding: 1rem;
     border-radius: 1rem;
     color: var(--pink);

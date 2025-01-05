@@ -1,10 +1,10 @@
 :root {
-    --dark: #374151;
-    --darker: #1F2937;
-    --darkest: #111827;
-    --grey: #6B7280;
-    --pink: #EC4899;
-    --purple: #8B5CF6;
+    --dark: #111827; 
+    --darker: #1a202c; 
+    --darkest: #0f172a; 
+    --grey: #718096;
+    --pink: #d53f8c;
+    --purple: #805ad5; 
 }
 
 @media (max-width: 768px) {
@@ -22,11 +22,10 @@
     }
  }
 
-* {
+ * {
     margin: 0;
-    padding: 0; 
     box-sizing: border-box;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Comfortaa", sans-serif;
 }
 
 body {
@@ -35,6 +34,10 @@ body {
     min-height: 100vh;
     color: #FFF;
     background-color: var(--dark);
+}
+
+input::placeholder{
+    color: var(--grey);
 }
 
 .flex-container {
@@ -73,6 +76,7 @@ h1 {
 input, button {
     padding: 1rem;
     border-radius: 1rem;
+    margin-bottom: 1rem;
 }
 
 input {
