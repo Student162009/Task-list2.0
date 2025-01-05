@@ -130,21 +130,25 @@ async function getTasks() {
 
     sortButton.addEventListener('click', (e) => {
         e.preventDefault();
+        document.querySelector("#tasks").innerHTML = "";
         sortAndDisplayTasks();
     });
 
     categorybut.addEventListener("click", (e)=>{
         e.preventDefault();
+        document.querySelector("#tasks").innerHTML = "";
         findCategory();
     });
 
     findnamebut.addEventListener("click", (e)=>{
         e.preventDefault();
+        document.querySelector("#tasks").innerHTML = "";
         findName();
     });
 
     findDeadbut.addEventListener("click", (e)=>{
         e.preventDefault();
+        document.querySelector("#tasks").innerHTML = "";
         findDeadline();
     });
 
