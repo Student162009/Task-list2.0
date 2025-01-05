@@ -10,18 +10,19 @@
     <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
+  
     <audio id="create" src="/music/Create.mp3"></audio>
     <audio id="check" src="/music/Check.mp3"></audio>
     <audio id="delete" src="/music/Delete.mp3"></audio>
     <audio id="edit" src="/music/Edit.mp3"></audio>
     <audio id="mainM" src="/music/Main.mp3" autoplay='autoplay' loop='loop'></audio>
-
 <div class="container">
     <div id="FI"></div>
     <button id="editUser">Edit Profile</button>
     <button id="log">Log Out (._.`)</button>
 </div>
     <header>
+      <div class="grad-container">
         <h1>Task List ^_^</h1>
         <form id="new-task-form">
             <input type="text" name="new-task-input" id="new-task-input" class="in" placeholder="What do you have planned?" autocomplete="off" autocorrect="off"/>
@@ -29,6 +30,8 @@
             <input type="text" name="category" id="category" placeholder="Category" class="in" autocomplete="off" autocorrect="off"/>
             <button id="new-task-submit">Add task</button>
         </form>
+      </div>
+      <div class="grad-container2">
         <div id="sort-tasks">
             <button id="sort-tasks-submit">Sort tasks</button>
             <input type="text" name="findcategory" id="findcategory" placeholder="Category name to search" autocomplete="off" autocorrect="off">
@@ -85,6 +88,7 @@
             </div>
           </fieldset>
         </div>
+      </div>
     </header>
     <main>
         <section class="task-list">
