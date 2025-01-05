@@ -10,6 +10,10 @@ window.addEventListener('load', () => {
     const Editaudio = document.getElementById("edit");
     const Deleteaudio = document.getElementById("delete");
     const mainM = document.getElementById("mainM");
+    const mainM2 = document.getElementById("mainM2");
+    const mainM3 = document.getElementById("mainM3");
+    const mainM4 = document.getElementById("mainM4");
+    const mainM5 = document.getElementById("mainM5");
     const catinput = document.getElementById("category");
     const findCat = document.getElementById("findcategory")
     const categorybut = document.getElementById("findcatbut");
@@ -35,9 +39,23 @@ window.addEventListener('load', () => {
  <button id="editUser">Edit Profile</button>
  <button id="log">Log Out (._.)</button>`; 
 
-    mainM.autoplay = true;
-    mainM.loop = true;
+    mainM.play();
 
+    mainM.addEventListener("ended", () =>{
+        mainM2.play();
+    });
+    mainM2.addEventListener("ended", () =>{
+        mainM3.play();
+    });
+    mainM3.addEventListener("ended", () =>{
+        mainM4.play();
+    });
+    mainM4.addEventListener("ended", () =>{
+        main5.play();
+    });
+    mainM5.addEventListener("ended", () =>{
+        mainM.play();
+    });
     Create.addEventListener("click", function() {
         Createaudio.play();
     });
