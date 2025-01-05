@@ -83,7 +83,10 @@ footer {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
+    text-align: center;
+    color: #FFF;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -113,6 +116,22 @@ header h1 {
 #new-task-form {
     display: flex;
     flex-wrap: wrap;
+}
+
+footer span.main-text { 
+    margin-top: 1rem;
+}
+footer span.secondary-text {
+    margin-top: 0.5rem;
+}
+
+img { 
+    max-width: 100%; 
+    height: auto; 
+    border: 2px solid var(--purple); 
+    border-radius: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 input, button {
@@ -231,7 +250,6 @@ button:hover:not(#Overduetasks):not(#completedtasks):not(#all):not(#not):not(inp
 }
 
 .grad-container2:hover {
-    transform: translateY(-3px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 }
 

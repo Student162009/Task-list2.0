@@ -19,6 +19,22 @@ window.addEventListener('load', () => {
     const findDeadbut = document.getElementById("finddeadlinebut");
     const change =  document.querySelectorAll('input[name="status"]');
 
+    const images = [ 
+    '../img/Ава1.jpg', 
+    '../img/Ава2.jpg', 
+    '../img/Ава3.jpg',
+    '../img/Ава4.jpg',
+    '../img/Ава5.jpg', ]; 
+
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const randomImage = images[randomIndex]; 
+    const imageContainer = document.getElementById('container');
+ imageContainer.innerHTML = `
+ <div id="FI"></div>
+ <img src="${randomImage}" alt="Random Image">
+ <button id="editUser">Edit Profile</button>
+ <button id="log">Log Out (._.)</button>`; 
+
     mainM.autoplay = true;
     mainM.loop = true;
 
