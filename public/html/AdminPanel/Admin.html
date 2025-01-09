@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/AdminPanel/Admin.css"/>
+</head>
+<body>
+    <audio id="log-in" src="/music/Perehod.mp3"></audio>
+    <audio id="error" src="/music/Ban.mp3"></audio>
+    <audio id="main" src="/music/Proga.mp3" autoplay='autoplay' loop='loop'></audio>
+    <div class="container">
+        <div class="flex-container"> 
+            <div class="head">
+                <h1>Admin Panel</h1>
+            </div>
+            <div class="enter"> 
+                <input type="text" id="Login" placeholder="Login, telefone or email" autocomplete="off" autocorrect="off"/>
+                <input type="password" id="Password" placeholder="Password" autocomplete="off" autocorrect="off"/>
+                <button id="enter">Enter</button>
+                <a href="../main.html">Back</a>
+                <a href="lostpassword.html">
+                    forgot your password?</a>
+            </div>
+        </div>
+    </div>
+    <script src="/js/AdminPanel/Admin.js"></script>
+</body>
+</html>

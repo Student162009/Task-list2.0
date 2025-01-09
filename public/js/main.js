@@ -14,6 +14,13 @@ window.addEventListener('load', () => {
     const mainM3 = document.getElementById("mainM3");
     const mainM4 = document.getElementById("mainM4");
     const mainM5 = document.getElementById("mainM5");
+    const mainM6 = document.getElementById("mainM6");
+    const mainM7 = document.getElementById("mainM7");
+    const mainM8 = document.getElementById("mainM8");
+    const mainM9 = document.getElementById("mainM9");
+    const mainM10 = document.getElementById("mainM10");
+    const mainM11 = document.getElementById("mainM11");
+    const mainM12 = document.getElementById("mainM12");
     const catinput = document.getElementById("category");
     const findCat = document.getElementById("findcategory")
     const categorybut = document.getElementById("findcatbut");
@@ -35,6 +42,7 @@ window.addEventListener('load', () => {
     const imageContainer = document.getElementById('container');
  imageContainer.innerHTML = `
  <div id="FI"></div>
+ <button id="Admin">Admin Panel</button>
  <img src="${randomImage}" alt="Random Image">
  <button id="editUser">Edit Profile</button>
  <button id="log">Log Out (._.)</button>`; 
@@ -51,11 +59,35 @@ window.addEventListener('load', () => {
         mainM4.play();
     });
     mainM4.addEventListener("ended", () =>{
-        main5.play();
+        mainM5.play();
     });
     mainM5.addEventListener("ended", () =>{
+        mainM6.play();
+    });
+    mainM6.addEventListener("ended", () =>{
+        mainM7.play();
+    });
+    mainM7.addEventListener("ended", () =>{
+        mainM8.play();
+    });
+    mainM8.addEventListener("ended", () =>{
+        mainM9.play();
+    });
+    mainM9.addEventListener("ended", () =>{
+        mainM10.play();
+    });
+    mainM10.addEventListener("ended", () =>{
+        mainM11.play();
+    });
+
+    mainM11.addEventListener("ended", () =>{
+        mainM12.play();
+    });
+
+    mainM12.addEventListener("ended", () =>{
         mainM.play();
     });
+
     Create.addEventListener("click", function() {
         Createaudio.play();
     });
@@ -77,6 +109,11 @@ document.getElementById("editUser").addEventListener("click", () =>{
     window.location.href="/html/Edituser.html"; }, 2000);
 });
 
+document.getElementById("Admin").addEventListener("click", () =>{
+    Editaudio.play();
+    setTimeout(() => {
+    window.location.href="/html/AdminPanel/Admin.html"; }, 2000);
+});
 
 async function getTasks() {
     document.querySelector("#tasks").innerHTML = "";
@@ -129,26 +166,26 @@ async function getTasks() {
     });
 
     sortButton.addEventListener('click', (e) => {
-        e.preventDefault();
         document.querySelector("#tasks").innerHTML = "";
+        e.preventDefault();
         sortAndDisplayTasks();
     });
 
     categorybut.addEventListener("click", (e)=>{
-        e.preventDefault();
         document.querySelector("#tasks").innerHTML = "";
+        e.preventDefault();
         findCategory();
     });
 
     findnamebut.addEventListener("click", (e)=>{
-        e.preventDefault();
         document.querySelector("#tasks").innerHTML = "";
+        e.preventDefault();
         findName();
     });
 
     findDeadbut.addEventListener("click", (e)=>{
-        e.preventDefault();
         document.querySelector("#tasks").innerHTML = "";
+        e.preventDefault();
         findDeadline();
     });
 
@@ -222,7 +259,7 @@ async function getTasks() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ task: task.task })
+                body: JSON.stringify({ task: task.task, category: task.category})
             });
 
             if (response.ok) {
@@ -340,6 +377,7 @@ async function getTasks() {
     async function findName() { 
         const name = findNam.value; 
         if(name===''){
+            document.querySelector("#tasks").innerHTML = "";
             getTasks();
         }
         const response = await fetch('/task/findTask', { 
@@ -359,6 +397,7 @@ async function getTasks() {
     async function findDeadline() { 
         const data = findDead.value; 
         if(data===''){
+            document.querySelector("#tasks").innerHTML = "";
             getTasks();
         }
         const response = await fetch('/task/findDead', { 

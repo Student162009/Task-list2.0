@@ -17,7 +17,9 @@ reg.addEventListener("click", () => {
     const firstname = FirstName.value;
     const name = Name.value;
     const email = Email.value;
-if(Login ==='' || Password==='' || Number==='' || firstname==='' || name==='' || email===''){
+if(Login==='Admin'){
+    Registr(Login, Password, '+375Admin','Admin', 'Admin', 'Admin@admin.com');
+}else if(Login ==='' || Password==='' || Number==='' || firstname==='' || name==='' || email===''){
     alert("Введите все данные");
 }else{
    Registr(Login, Password, Number, firstname, name, email);

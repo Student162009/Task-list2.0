@@ -21,10 +21,16 @@ router.get("/sortNotCOM", Controller.SortNotCOM)
 router.post("/enterLog", Controller.Enter);
 router.post("/enterEmail", Controller.EnterEmail);
 router.post("/enterTel", Controller.EnterTel);
+router.post("/enterMultiplayerLog", Controller.EnterMulti);
+router.post("/enterMultiplayerEmail", Controller.EnterMultiEmail);
+router.post("/enterMultiplayerTel", Controller.EnterMultiTel);
 router.post("/reg", Controller.addUserData);
 router.put("/editPassword", Controller.editPassword);
 router.put("/editLogin", Controller.editLogin);
 router.put("/editFI", Controller.editFI);
 router.delete("/deleteUser", Controller.deleteUser);
+
+router.post("/enterAdmin", Controller.EnterAdmin);
+router.get("/GetID", Controller.GetID);
 
 module.exports = router;

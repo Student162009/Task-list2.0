@@ -7,6 +7,7 @@
     <title>Task List</title>
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="/css/enter.css"/>
 </head>
 <body>
@@ -22,6 +23,8 @@
             <div class="enter"> 
                 <input type="text" id="Login" placeholder="Login, telefone or email" autocomplete="off" autocorrect="off"/>
                 <input type="password" id="Password" placeholder="Password" autocomplete="off" autocorrect="off"/>
+                <input type="text" id="Indefic" placeholder="Unique ID" autocomplete="off" autocorrect="off"/>
+                <div class="g-recaptcha" data-sitekey="6Le0J7IqAAAAAJRYeFWCcQIazXSvlNZ43raCwXzk"></div>
                 <button id="enter">Enter</button>
                 <button id="reg">Regist</button>
                 <a href="lostpassword.html">

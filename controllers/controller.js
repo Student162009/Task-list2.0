@@ -1,5 +1,25 @@
 const DATA = require("../data/data");
 
+const verifyCaptcha = async (req, res) => {
+    const captchaResponse = req.body['g-recaptcha-response'];
+    const secretKey = '6Le0J7IqAAAAAO7k7uu0VNUB3_Kn3cdIAbcW2Xdb';
+
+    const response = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaResponse}`, {
+        method: 'POST'
+    });
+    
+    const data = await response.json();
+
+    if (data.success) {
+       
+        res.status(200).send("Капча пройдена!");
+    } else {
+       
+        res.status(400).send("Ошибка капчи. Пожалуйста, попробуйте снова.");
+    }
+};
+
+
 const addUserData = (req, res) => {
     const dataFromClient = req.body;
     const result = DATA.addUserData(dataFromClient.Login, dataFromClient.Password, dataFromClient.Number, dataFromClient.firstname, dataFromClient.name, dataFromClient.email);
@@ -18,8 +38,8 @@ const Enter = (req, res) =>{
   
     const user = data.find(user => user.login === dataFromClient.Data && user.parol === dataFromClient.Password);
     const USLOG = data.findIndex(l => l.login === dataFromClient.Data);
-    console.log(USLOG);
     DATA.setUserLog(data[USLOG].login);
+    DATA.addUserTaskFile(data[USLOG].login);
 if(user){
     DATA.readData();
     res.status(200).json({
@@ -31,6 +51,130 @@ if(user){
     res.status(409).send("УПС! ТАКОГО ЛОГИНА ИЛИ ПАРОЛЯ НЕТ");
 }
 };
+
+const EnterEmail = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetUserData();
+    const user = data.find(user => user.email === dataFromClient.Data && user.parol === dataFromClient.Password);
+    const USLOG = data.findIndex(l => l.login === dataFromClient.Data);
+    DATA.setUserLog(data[USLOG].DATA.login);
+    DATA.addUserTaskFile(data[USLOG].DATA.login);
+if(user){
+    DATA.readData();
+    res.status(200).json({
+        message: "Одобрено",
+        firstname: user.firstname,
+        name: user.name
+    });
+}else{
+    res.status(409).send("УПС! ТАКОЙ ЭЛЕКТРОННОЙ ПОЧТЫ ИЛИ ПАРОЛЯ НЕТ");
+}
+};
+
+const EnterTel = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetUserData();
+    const user = data.find(user => user.numtel === dataFromClient.Data && user.parol === dataFromClient.Password);
+    const USLOG = data.findIndex(l => l.login === dataFromClient.Data);
+    DATA.setUserLog(data[USLOG].DATA.login);
+    DATA.addUserTaskFile(data[USLOG].DATA.login);
+if(user){
+    DATA.readData();
+    res.status(200).json({
+        message: "Одобрено",
+        firstname: user.firstname,
+        name: user.name
+    });
+}else{
+    res.status(409).send("УПС! ТАКОГО ТЕЛЕФОНА ИЛИ ПАРОЛЯ НЕТ");
+}
+};
+
+const EnterMulti = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetUserData();
+    const id = DATA.GetID();
+    const user = data.find(user => user.login === dataFromClient.Data && user.parol === dataFromClient.Password);
+   if(id == dataFromClient.ID){
+    if(user){
+        DATA.addMultiTaskFile(id);
+        DATA.setMultiID(id);
+        DATA.readData();
+        res.status(200).json({
+            message: "Одобрено",
+            firstname: user.firstname,
+            name: user.name
+        });
+        
+    }else{
+        res.status(409).send("УПС! ТАКОГО ТЕЛЕФОНА ИЛИ ПАРОЛЯ НЕТ");
+    }
+}else{
+    res.status(409).send("УПС! ID НЕ ПРАВИЛЬНЫЙ");
+}
+    };
+
+const EnterMultiEmail = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetUserData();
+    const user = data.find(user => user.email === dataFromClient.Data && user.parol === dataFromClient.Password);
+    const id = DATA.GetID();
+    if(id == dataFromClient.ID){
+        if(user){
+            DATA.addMultiTaskFile(id);
+            DATA.setMultiID(id);
+            DATA.readData();
+            res.status(200).json({
+                message: "Одобрено",
+                firstname: user.firstname,
+                name: user.name
+            });
+            
+        }else{
+            res.status(409).send("УПС! ТАКОГО ТЕЛЕФОНА ИЛИ ПАРОЛЯ НЕТ");
+        }
+    }else{
+        res.status(409).send("УПС! ID НЕ ПРАВИЛЬНЫЙ");
+    }
+        };
+
+const EnterMultiTel = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetUserData();
+    const user = data.find(user => user.numtel === dataFromClient.Data && user.parol === dataFromClient.Password);
+    const id = DATA.GetID();
+    if(id == dataFromClient.ID){
+        if(user){
+            DATA.addMultiTaskFile(id);
+            DATA.setMultiID(id);
+            DATA.readData();
+            res.status(200).json({
+                message: "Одобрено",
+                firstname: user.firstname,
+                name: user.name
+            });
+            
+        }else{
+            res.status(409).send("УПС! ТАКОГО ТЕЛЕФОНА ИЛИ ПАРОЛЯ НЕТ");
+        }
+    }else{
+        res.status(409).send("УПС! ID НЕ ПРАВИЛЬНЫЙ");
+    }
+};
+
+const EnterAdmin = (req, res) =>{
+    const dataFromClient = req.body;
+    const data = DATA.GetUserData();
+    const user = data.find(user => user.login === dataFromClient.Login && user.parol === dataFromClient.Password);
+if(user){
+    res.status(200).json({
+        message: "Одобрено",
+    });
+}else{
+    res.status(409).send("Проверьте есть ли Админ");
+}
+};
+
 const editPassword = (req, res) => {
     const { Login, Newpass} = req.body;
     const result = DATA.editPassword(Login, Newpass);
@@ -79,45 +223,15 @@ const deleteUser = (req, res) => {
     res.status(200).send("Пользователь удален");
 };
 
-const EnterEmail = (req, res) =>{
-    const dataFromClient = req.body;
-    const data = DATA.GetUserData();
-    const user = data.find(user => user.email === dataFromClient.Data && user.parol === dataFromClient.Password);
-    const USLOG = data.findIndex(l => l.login === dataFromClient.Data);
-    DATA.setUserLog(data[USLOG].DATA.login);
-if(user){
-    DATA.readData();
-    res.status(200).json({
-        message: "Одобрено",
-        firstname: user.firstname,
-        name: user.name
-    });
-}else{
-    res.status(409).send("УПС! ТАКОЙ ЭЛЕКТРОННОЙ ПОЧТЫ ИЛИ ПАРОЛЯ НЕТ");
-}
-};
-
-const EnterTel = (req, res) =>{
-    const dataFromClient = req.body;
-    const data = DATA.GetUserData();
-    const user = data.find(user => user.numtel === dataFromClient.Data && user.parol === dataFromClient.Password);
-    const USLOG = data.findIndex(l => l.login === dataFromClient.Data);
-    DATA.setUserLog(data[USLOG].DATA.login);
-if(user){
-    DATA.readData();
-    res.status(200).json({
-        message: "Одобрено",
-        firstname: user.firstname,
-        name: user.name
-    });
-}else{
-    res.status(409).send("УПС! ТАКОГО ТЕЛЕФОНА ИЛИ ПАРОЛЯ НЕТ");
-}
-};
-
 const GetData = (req, res) => {
     const data = DATA.GetData();
     res.status(200).json(data);
+};
+
+const GetID = (req, res) => {
+    DATA.AddID();
+    const ID = DATA.GetID();
+    res.status(200).json(ID);
 };
 
 const addData = (req, res) => {
@@ -162,8 +276,8 @@ const sortData = (req, res) => {
 };
 
 const markComplete = (req, res) => {
-    const { task } = req.body;
-    const result = DATA.markTaskComplete(task);
+    const { task, category } = req.body;
+    const result = DATA.markTaskComplete(task, category);
 
     if (!result) {
         res.status(404).send("Задача не найдена.");
@@ -262,5 +376,11 @@ module.exports = {
     editFI, 
     deleteUser, 
     EnterEmail, 
-    EnterTel
+    EnterTel,
+    EnterMulti,
+    EnterMultiEmail,
+    EnterMultiTel,
+    EnterAdmin,
+    GetID,
+    verifyCaptcha
 };

@@ -1,7 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 let LOG = ''; 
+let Id = '';
 const userTasksDir = path.join(__dirname, 'json/userTasks');
+
+const MultiTasksDir = path.join(__dirname, 'json/MultiTasks');
+
+fs.rmSync(MultiTasksDir, { recursive: true, force: true });
 
 if (!fs.existsSync(userTasksDir)) {
     fs.mkdirSync(userTasksDir);
@@ -13,6 +18,11 @@ let UserData = [];
 const setUserLog = (login) => {
     Data = [];
     LOG = login;
+};
+
+const setMultiID = (login) => {
+    Data = [];
+    Id = login;
 };
 
 const UserLOGFilePath = path.join(__dirname, 'json/dataAUT.json');
@@ -40,10 +50,15 @@ const readUserData = () => {
 readUserData();
 
 const writeData = (DATA) => {
+    if(Id==''){
     fs.writeFileSync(path.join(__dirname, `json/userTasks/${LOG}.json`), JSON.stringify(DATA, null, 2));
+    }else{
+    fs.writeFileSync(path.join(__dirname, `json/MultiTasks/${Id}.json`), JSON.stringify(DATA, null, 2));
+    }
 };
 
 const readData = () => {
+    if(Id==''){
     if (Data.length === 0) {
         if (!fs.existsSync(path.join(__dirname, `json/userTasks/${LOG}.json`)) || fs.readFileSync(path.join(__dirname, `json/userTasks/${LOG}.json`)).length === 0) {
             Data = [];
@@ -58,6 +73,22 @@ const readData = () => {
             }
         }
     }
+}else{
+    if (Data.length === 0) {
+        if (!fs.existsSync(path.join(__dirname, `json/MultiTasks/${Id}.json`)) || fs.readFileSync(path.join(__dirname, `json/MultiTasks/${Id}.json`)).length === 0) {
+            Data = [];
+        } else {
+            try {
+                const rawData = fs.readFileSync(path.join(__dirname, `json/MultiTasks/${Id}.json`));
+                Data = JSON.parse(rawData);
+                console.log(Data);
+            } catch (error) {
+                console.error("Ошибка при чтении данных:", error);
+                Data = [];
+            }
+        }
+    }
+}
     return Data;
 };
 
@@ -70,10 +101,13 @@ const addUserData = ( login, parol, numtel, firstname, name, email) => {
     const newData = {login, parol, numtel, firstname, name, email};
     UserData.push(newData);
     writeUserData(UserData);
+    if(login!=='Admin'){
     addUserTaskFile(login);
     setUserLog(login);
     readData();
-    return newData;}
+}
+    return newData;
+}
     
 const editPassword = (Login, NewPassword) =>{
         const LoginIndex = UserData.findIndex(l => l.login === Login);
@@ -134,6 +168,16 @@ const addUserTaskFile = (login) => {
     }
 };
 
+const addMultiTaskFile = (login) => {
+    if (!fs.existsSync(MultiTasksDir)) {
+        fs.mkdirSync(MultiTasksDir);
+    }
+    const taskFilePath = path.join(MultiTasksDir, `${login}.json`);
+    if (!fs.existsSync(taskFilePath)) {
+        fs.writeFileSync(taskFilePath, JSON.stringify([])); 
+    }
+};
+
 const addData = (task, category) => {
     const newData = { task, category }; 
     Data.push(newData);
@@ -141,6 +185,15 @@ const addData = (task, category) => {
     return newData;
 };
 
+const GetID = () => {
+    return Id;
+};
+
+const AddID = () => {
+    const id  = Math.floor(1000000000000000 + Math.random() * 9000000000000000);
+    setMultiID(id);
+    return id;
+};
 
 const editData = (task, newTaskData) => {
     const taskIndex = Data.findIndex(t => t.task === task);
@@ -166,8 +219,8 @@ const sortTasks = () => {
     return Data.sort((a, b) => a.task.localeCompare(b.task));
 };
 
-const markTaskComplete = (task) => {
-    const taskIndex = Data.findIndex(t => t.task === task);
+const markTaskComplete = (task, category) => {
+    const taskIndex = Data.findIndex(t => t.task === task && t.category === category);
     if (taskIndex === -1) {
         return null;
     }
@@ -244,5 +297,10 @@ module.exports = {
      getCOM,
      getNotCOM,
      setUserLog,
-     readData
+     readData,
+     GetID,
+     AddID,
+     addUserTaskFile,
+     addMultiTaskFile,
+     setMultiID
     };
