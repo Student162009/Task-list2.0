@@ -30,6 +30,8 @@ window.addEventListener("load", () => {
   const findDeadbut = document.getElementById("finddeadlinebut");
   const change = document.querySelectorAll('input[name="status"]');
 
+
+
   const images = [
     "../img/Ава1.jpg",
     "../img/Ава2.jpg",
@@ -41,12 +43,6 @@ window.addEventListener("load", () => {
   const randomIndex = Math.floor(Math.random() * images.length);
   const randomImage = images[randomIndex];
   const imageContainer = document.getElementById("container");
-  imageContainer.innerHTML = `
- <div id="FI"></div>
- <img src="${randomImage}" alt="Random Image">
- <button id="editUser">Edit Profile</button>
- <button id="log">Log Out (._.)</button>
- `;
 
   mainM.play();
 
@@ -92,13 +88,47 @@ window.addEventListener("load", () => {
   Create.addEventListener("click", function () {
     Createaudio.play();
   });
-
   const firstname = localStorage.getItem("firstname");
   const name = localStorage.getItem("name");
-
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), 11, 25); 
+  const endDate = new Date(today.getFullYear(), 0, 8); 
+  if (today < startDate) {
+      startDate.setFullYear(startDate.getFullYear() - 1);
+      endDate.setFullYear(endDate.getFullYear() - 1);
+  }
+  if (today >= startDate && today <= endDate) {
+    imageContainer.innerHTML = `
+    <div id="FI"></div>
+    <img src="${randomImage}" alt="Random Image">
+    <button id="editUser">Edit Profile</button>
+    <button id="log">Log Out (._.)</button>
+    `;
+    if (firstname && name) {
+      document.getElementById("FI").innerText = `Happy New Year and Merry Christmas, ${firstname} ${name}!`;
+    }
+  }
+ if(today!=startDate){
+  imageContainer.innerHTML = `
+  <div id="FI"></div>
+  <img src="${randomImage}" alt="Random Image">
+  <button id="editUser">Edit Profile</button>
+  <button id="log">Log Out (._.)</button>
+  `;
   if (firstname && name) {
     document.getElementById("FI").innerText = `Welcome, ${firstname} ${name}!`;
   }
+ }
+
+ const OLDVER = document.getElementById("oldversion");
+
+ OLDVER.addEventListener("click", () => {
+  alert("ТЫ ПЛАХОЙ ПОТОМУ ЧТО ВЫБРАЛ СТАРУЮ ВЕРСИЮ. МИТА ОБИДЕЛАСЬ!");
+  window.location.href =
+    "https://student162009.github.io/Task-list/";
+});
+
+
 
   const secretButton = document.createElement("button");
   secretButton.textContent = "Секретная кнопка";
@@ -221,7 +251,21 @@ window.addEventListener("load", () => {
     const deadline = deadlineInput.value;
     const category = catinput.value;
 
-    if (task === "" || category === "") {
+if(task==="Бананчики" && category ==="Бананчики"){
+  alert(
+    "БАНАНЧИКИ"
+  );
+  window.location.href = "https://youtu.be/YR16dpgtE_0";
+}
+
+if(task==="Мита" && category ==="Miside"){
+  alert(
+    "Как мило с твоей стороны^^"
+  );
+  window.location.href = "/img/Miside.png";
+}
+
+    if (task === "" && task!="Бананчики" && task!="Мита" || category === "" && category!="Бананчики" && category!="Miside") {
       alert(
         "Эй, похоже, что поле задачи и категории решили поиграть в прятки! Они не могут быть пустыми. Давайте их найдем и заполним!"
       );

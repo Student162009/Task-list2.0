@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <video id="mitaVideo" style="display: none">
-      <source src="/video/Мита.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    
     <audio id="create" src="/music/Create.mp3"></audio>
     <audio id="check" src="/music/Check.mp3"></audio>
     <audio id="delete" src="/music/Delete.mp3"></audio>
@@ -38,6 +35,9 @@
     <button id="Admin">Admin Panel</button>
     <header>
       <div class="grad-container">
+        <video id="mitaVideo" style="display: none">
+          <source src="/video/Мита.mp4" type="video/mp4" />
+        </video>
         <h1>Task List ^_^</h1>
         <form id="new-task-form">
           <input
@@ -155,6 +155,7 @@
       </section>
     </main>
     <footer>
+      <button id="oldversion">OldVersion(Data clear or save?)</button>
       <span class="main-text">©Минск 2025</span>
       <span class="secondary-text">
         Внимание! Сайт сделан с 0 лапками ёжика ^_^ Убедительная просьба не
