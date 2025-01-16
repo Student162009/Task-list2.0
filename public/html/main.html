@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task List</title>
-    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css"/>
-</head>
-<body>
-  
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <video id="mitaVideo" style="display: none">
+      <source src="/video/Мита.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
     <audio id="create" src="/music/Create.mp3"></audio>
     <audio id="check" src="/music/Check.mp3"></audio>
     <audio id="delete" src="/music/Delete.mp3"></audio>
@@ -28,28 +34,72 @@
     <audio id="mainM11" src="/music/Main11.mp3"></audio>
     <audio id="mainM12" src="/music/Main12.mp3"></audio>
 
-<div id="container" class="container"></div>
+    <div id="container" class="container"></div>
+    <button id="Admin">Admin Panel</button>
     <header>
       <div class="grad-container">
         <h1>Task List ^_^</h1>
         <form id="new-task-form">
-            <input type="text" name="new-task-input" id="new-task-input" class="in" placeholder="What do you have planned?" autocomplete="off" autocorrect="off"/>
-            <input type="date" name="new-task-deadline" id="new-task-deadline" class="in" placeholder="Deadline" />
-            <input type="text" name="category" id="category" placeholder="Category" class="in" autocomplete="off" autocorrect="off"/>
-            <button id="new-task-submit">Add task</button>
+          <input
+            type="text"
+            name="new-task-input"
+            id="new-task-input"
+            class="in"
+            placeholder="What do you have planned?"
+            autocomplete="off"
+            autocorrect="off"
+          />
+          <input
+            type="date"
+            name="new-task-deadline"
+            id="new-task-deadline"
+            class="in"
+            placeholder="Deadline"
+          />
+          <input
+            type="text"
+            name="category"
+            id="category"
+            placeholder="Category"
+            class="in"
+            autocomplete="off"
+            autocorrect="off"
+          />
+          <button id="new-task-submit">Add task</button>
         </form>
       </div>
       <div class="grad-container2">
         <div id="sort-tasks">
-            <button id="sort-tasks-submit">Sort tasks</button>
-            <input type="text" name="findcategory" id="findcategory" placeholder="Category name to search" autocomplete="off" autocorrect="off">
-            <button id="findcatbut">FindByCategory</button>
-            <input type="text" name="findname" id="findname" placeholder="Name or letter to search for" autocomplete="off" autocorrect="off">
-            <button id="findnamebut">FindByName</button>
-            <input type="date" name="finddeadline" id="finddeadline" placeholder="Deadline to search" autocomplete="off" autocorrect="off">
-            <button id="finddeadlinebut">FindByDeadline</button>
-        <h1>Sort by ready tasks</h1>
-        <fieldset class="radio-set" id="f">
+          <button id="sort-tasks-submit">Sort tasks</button>
+          <input
+            type="text"
+            name="findcategory"
+            id="findcategory"
+            placeholder="Category name to search"
+            autocomplete="off"
+            autocorrect="off"
+          />
+          <button id="findcatbut">FindByCategory</button>
+          <input
+            type="text"
+            name="findname"
+            id="findname"
+            placeholder="Name or letter to search for"
+            autocomplete="off"
+            autocorrect="off"
+          />
+          <button id="findnamebut">FindByName</button>
+          <input
+            type="date"
+            name="finddeadline"
+            id="finddeadline"
+            placeholder="Deadline to search"
+            autocomplete="off"
+            autocorrect="off"
+          />
+          <button id="finddeadlinebut">FindByDeadline</button>
+          <h1>Sort by ready tasks</h1>
+          <fieldset class="radio-set" id="f">
             <legend class="visually-hidden"></legend>
             <div class="radio-container">
               <label class="radio-label">
@@ -60,7 +110,7 @@
                   name="status"
                   value="not"
                   id="not"
-                >
+                />
                 <span class="radio-title">Completed</span>
               </label>
               <label class="radio-label">
@@ -70,7 +120,7 @@
                   name="status"
                   value="completedtasks"
                   id="completedtasks"
-                >
+                />
                 <span class="radio-title">Overdue</span>
               </label>
               <label class="radio-label">
@@ -80,7 +130,7 @@
                   name="status"
                   id="Overduetasks"
                   value="overdue"
-                >
+                />
                 <span class="radio-title">All</span>
               </label>
               <label class="radio-label">
@@ -91,7 +141,7 @@
                   id="all"
                   value="all"
                   checked
-                >
+                />
               </label>
             </div>
           </fieldset>
@@ -99,20 +149,19 @@
       </div>
     </header>
     <main>
-        <section class="task-list">
-            <h2 id="taskh">Tasks</h2>
-            <div id="tasks"></div>
-        </section>
+      <section class="task-list">
+        <h2 id="taskh">Tasks</h2>
+        <div id="tasks"></div>
+      </section>
     </main>
     <footer>
-        <span class="main-text">©Минск 2025</span>
-        <span class="secondary-text">
-            Внимание! Сайт сделан с 0 лапками ёжика ^_^ Убедительная просьба не трогать спящих ежей ^_^
-            Программист не продаётся ༼ つ ◕_◕ ༽つ
-        </span>
+      <span class="main-text">©Минск 2025</span>
+      <span class="secondary-text">
+        Внимание! Сайт сделан с 0 лапками ёжика ^_^ Убедительная просьба не
+        трогать спящих ежей ^_^ Программист не продаётся ༼ つ ◕_◕ ༽つ
+      </span>
     </footer>
 
     <script src="/js/main.js"></script>
-</body>
+  </body>
 </html>
-
