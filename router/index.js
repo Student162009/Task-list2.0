@@ -16,7 +16,7 @@ router.post("/findTask", Controller.FindbyName);
 router.post("/findDead", Controller.FindbyDead);
 router.get("/sortDead", Controller.SortDead);
 router.get("/sortCOM", Controller.SortCOM);
-router.get("/sortNotCOM", Controller.SortNotCOM)
+router.get("/sortNotCOM", Controller.SortNotCOM);
 
 router.post("/enterLog", Controller.Enter);
 router.post("/enterEmail", Controller.EnterEmail);
