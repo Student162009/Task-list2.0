@@ -114,34 +114,38 @@ window.addEventListener("load", () => {
     }
   });
 
-  const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-  recognition.lang = "en-US";
-  recognition.maxResults = 10;
+  let tapCount = 0;
+  let lastTap = 0;
 
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    if (transcript.toLowerCase().includes("Secret")) {
+  document.addEventListener("touchstart", (e) => {
+    const now = Date.now();
+    const timeSinceLastTap = now - lastTap;
+
+    if (timeSinceLastTap <= 300 && timeSinceLastTap > 0) {
+      tapCount++;
+      if (tapCount === 2) {
+        secretButton.style.display = "none";
+        tapCount = 0;
+      }
+    } else {
+      tapCount = 1;
+    }
+
+    lastTap = now;
+  });
+
+  let swipeStartX = 0;
+  let swipeEndX = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    swipeStartX = e.touches[0].clientX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    swipeEndX = e.changedTouches[0].clientX;
+    if (swipeStartX - swipeEndX > 100) {
       secretButton.style.display = "block";
     }
-    if (transcript.toLowerCase().includes("Hide")) {
-      secretButton.style.display = "none";
-    }
-  };
-
-  recognition.onerror = (event) => {
-    console.error("Ошибка распознавания:", event.error);
-  };
-
-  recognition.onstart = () => {
-    console.log("Начало распознавания");
-  };
-
-  recognition.onend = () => {
-    console.log("Окончание распознавания");
-  };
-
-  document.getElementById("startSpeech").addEventListener("click", () => {
-    recognition.start();
   });
 
   secretButton.addEventListener("click", () => {
